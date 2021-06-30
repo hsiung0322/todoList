@@ -1,6 +1,23 @@
 # todoList
 ## codepen
 <https://codepen.io/hsiungchi/pen/QWvWYMM>
+## data
+```js
+let data = [
+    {
+        content: "畫畫",
+        status: "待完成"
+    },
+    {
+        content: "讀英文",
+        status: "待完成"
+    },
+    {
+        content: "買禮物",
+        status: "已完成"
+    },
+];
+```
 ## render 渲染html
 ```js
 let htmlStr = '';
