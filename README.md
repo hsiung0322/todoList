@@ -2,7 +2,7 @@
 ## codepen
 <https://codepen.io/hsiungchi/pen/QWvWYMM>
 ## render 渲染html
-```
+```js
 let htmlStr = '';
     //讀取data裡面的值
     data.forEach(function(item,index){
@@ -28,7 +28,7 @@ let htmlStr = '';
     itemList.innerHTML = htmlStr;
 ```
 ## add
-```
+```js
 addBtn.addEventListener('click',function(){
     if(addItem.value == ""){
         alert("請輸入待辦事項，不可為空");
@@ -45,7 +45,7 @@ addBtn.addEventListener('click',function(){
 });
 ```
 ## remove
-```
+```js
 itemList.addEventListener('click',function(e){
     item = e.target;
     //刪除特定項目
