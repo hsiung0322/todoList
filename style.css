@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&family=Roboto&display=swap');@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Noto+Serif+TC:wght@500&display=swap');
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -56,7 +58,7 @@ img {
 }
 body{
   line-height: 1.5;
-  font-family: sans-serif;
+  font-family: 'Noto Serif TC','Roboto', sans-serif;
   background: #FFD370;
 }
 
@@ -68,13 +70,13 @@ h1{
   font-size: 48px;
   text-align: center;
 }
-.input{
+.input-item{
   width: 500px;
   background: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
 }
-input{
+.add-item{
   width: 450px;
   height: 48px;
   padding-left: 24px;
@@ -123,29 +125,33 @@ input{
 .item-list li{
   display: flex;
   align-items: center;
-  padding-left: 24px;
-  padding-right: 24px;
+  justify-content: space-between;
+  padding: 10px 24px;
 }
-.item-list p{
-  width: 420px;
-  border-bottom: 1px solid #EFEFEF;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.todo-btn,.remove-btn,.done-btn{
+.checkbox{
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  overflow: hidden;
 }
-.todo-btn,.done-btn{
-  margin-right: 20px;
+.checkbox input{
+  cursor: pointer;
+  margin-right: 10px;
 }
-.done-btn{
+.checkbox input:checked,.checkbox input + span{
+  display: none;
+}
+.checkbox input:checked + span{
+  display: inline-block;
+  margin-right: 10px;
   color: #FFD370;
 }
-.done p{
+.checkbox input:checked + span + p{
   text-decoration: line-through;
   color: #D3D3D3;
 }
 .remove-btn{
+  cursor: pointer;
   color: #000;
   margin-left: 20px;
 }

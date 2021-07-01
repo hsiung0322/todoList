@@ -1,30 +1,21 @@
 const itemList = document.querySelector(".item-list");
-const addItem = document.getElementById("add-item");
+const addItem = document.querySelector(".add-item");
 const addBtn = document.querySelector(".add-btn");
 const statusList = document.querySelector(".status-list");
+const checkbox = document.querySelector(".checkbox");
 
-let data = [
-    // {
-    //     content: "TEXT",
-    //     status: "待完成"
-    // },
-    // {
-    //     content: "hello",
-    //     status: "待完成"
-    // },
-    // {
-    //     content: "123",
-    //     status: "已完成"
-    // },
-    // {
-    //     content: "456",
-    //     status: "待完成"
-    // },
-    // {
-    //     content: "EEWE",
-    //     status: "已完成"
-    // }
-];
+
+let data = [];
+
+function unfinished_count(){
+    let count=0;
+    data.forEach(function(item){
+        if(item.checked == false){
+            count++;
+        }
+    });
+    return count;
+}
 
 function render(){
 
@@ -38,21 +29,26 @@ function render(){
         <li>待完成</li>
         <li>已完成</li>`;
 
+        let count = unfinished_count();
+
         let htmlStr = '';
-        let count=0;
         data.forEach(function(item,index){
-            if(item.status == "待完成"){
-                count++;
-                //待完成的li
-                htmlStr+=`<li class="todo">
-                <i class="todo-btn far fa-square" data-id="${index}"></i>
-                <p>${item.content}</p>
+            if(item.checked){ //finished...
+                htmlStr+=`<li>
+                <label class="checkbox">
+                    <input type="checkbox" checked data-id=${index}>
+                    <span>✔</span>
+                    <p>${item.content}</p>
+                </label>
                 <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                 </li>`
-            }else{ //已完成的li
-                htmlStr+=`<li class="done">
-                <i class="done-btn fas fa-check" data-id="${index}"></i>
-                <p>${item.content}</p>
+            }else{ //unfinished...
+                htmlStr+=`<li>
+                <label class="checkbox">
+                    <input type="checkbox" data-id=${index}>
+                    <span>✔</span>
+                    <p>${item.content}</p>
+                </label>
                 <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                 </li>`
             }
@@ -65,39 +61,35 @@ function render(){
     }
 };
 
-function add(){
+
+render();
+
+//add
+addBtn.addEventListener('click',function(){
     if(addItem.value == ""){
         alert("請輸入待辦事項，不可為空");
         return;
     }else{
         let obj = {}
         obj.content = addItem.value;
-        obj.status = "待完成";
+        obj.checked = false;
         data.push(obj);
     }
     //再次渲染
     render();
     addItem.value = "";
-};
-
-
-render();
-
-//add
-addBtn.addEventListener('click',function(){
-    add();
 });
 addItem.addEventListener('keypress',function(e){
-    console.log(e.keyCode);
+    // console.log(e.keyCode);
     if(e.keyCode === 13){
-        add();
+        addBtn.click();
     }
 });
 
 
 itemList.addEventListener('click',function(e){
     item = e.target;
-    // console.log(e);
+    // console.log(item);
     //刪除特定項目
     if(item.getAttribute("class")=="remove-btn fas fa-times"){
         let removeId = item.getAttribute("remove-id");
@@ -109,21 +101,21 @@ itemList.addEventListener('click',function(e){
         //從後面刪除，index才不會亂掉 (從前面刪,index會變)
         let len = data.length;
         for(let i=len-1;i>=0;i--){
-            if(data[i].status=="已完成"){
+            if(data[i].checked){
                 data.splice(i,1);
             }
         }
         render();
-    }else if(item.getAttribute("class")=="todo-btn far fa-square"){
-        //直接變更data的status  todo -> done
+    }else if(item.checked){ //true 的話 unfinished -> finished
+        //直接變更data的checked  false -> true
         let index = item.getAttribute("data-id");
-        data[index].status = "已完成";
+        data[index].checked = true;
         //重新渲染
         render();
-    }else if(item.getAttribute("class")=="done-btn fas fa-check"){
-        //直接變更data的status  done -> todo
+    }else if(item.checked == false){ //false 的話 finished -> funinished
+        //直接變更data的checked  true -> false
         let index = item.getAttribute("data-id");
-        data[index].status = "待完成";
+        data[index].checked = false;
         //重新渲染
         render();
     }
@@ -149,12 +141,15 @@ statusList.addEventListener('click',function(e){
             statusList.innerHTML = `<li>全部</li>
             <li>待完成</li>
             <li class="active">已完成</li>`;
-            //讀取status == done 資料，渲染
+            //讀取checked == true 資料，渲染
             data.forEach(function(item,index){
-                if(item.status == "已完成"){
-                    html+=`<li class="done">
-                    <i class="done-btn fas fa-check" data-id="${index}"></i>
-                    <p>${item.content}</p>
+                if(item.checked){
+                    html+=`<li>
+                    <label class="checkbox">
+                        <input type="checkbox" checked data-id=${index}>
+                        <span>✔</span>
+                        <p>${item.content}</p>
+                    </label>
                     <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                     </li>`
                 }
@@ -168,13 +163,16 @@ statusList.addEventListener('click',function(e){
             statusList.innerHTML = `<li>全部</li>
             <li class="active">待完成</li>
             <li>已完成</li>`;
-            let count = 0;
+
+            let count = unfinished_count();
             data.forEach(function(item,index){
-                if(status == item.status){
-                    count++;
+                if(item.checked == false){
                     html+=`<li>
-                    <i class="todo-btn far fa-square" data-id="${index}"></i>
-                    <p>${item.content}</p>
+                    <label class="checkbox">
+                        <input type="checkbox" data-id=${index}>
+                        <span>✔</span>
+                        <p>${item.content}</p>
+                    </label>
                     <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                     </li>`
                 }
