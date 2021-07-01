@@ -1,0 +1,115 @@
+body{
+    line-height: 1.5;
+    font-family: 'Noto Serif TC','Roboto', sans-serif;
+    background: $primary;
+}
+.todo-list{
+    width: 500px;
+    margin: 0 auto;
+}
+h1{
+    font-size: 48px;
+    text-align: center;
+}
+.input-item{
+    width: 500px;
+    background: $white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    .add-item{
+        width: 450px;
+        height: 48px;
+        padding-left: 24px;
+        font-size: 24px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+    }
+    .add-btn{
+        background: $secondary;
+        color: $white;
+        text-align: center;
+        width: 40px;
+        font-size: 24px;
+        padding: 8px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
+.status-list{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    background: $white;
+    border-radius: 10px 10px 0 0;
+    li{
+        width: 166.6px;
+        font-size: 20px;
+        border-bottom: 3px solid $light_gary;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        cursor: pointer;
+        &:hover{
+            border-bottom: 3px solid $secondary;
+        }
+        .active{
+            border-bottom: 3px solid $secondary;
+        }
+    }
+}
+.item-list{
+    background: $white;
+    border-radius: 0 0 10px 10px;
+    font-size: 20px;
+    li{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 24px;
+    }
+}
+//label > input
+.checkbox{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    input{
+        cursor: pointer;
+        margin-right: 10px;
+        &+span{
+            display: none;
+        }
+    }
+    input:checked{
+        display: none;
+        &+span{
+            display: inline-block;
+            margin-right: 10px;
+            color: $primary;
+        }
+        &+span+p{
+            text-decoration: line-through;
+            color: $gary;
+        }
+    }
+}
+.remove-btn{
+    cursor: pointer;
+    color: $secondary;
+    margin-left: 20px;
+}
+.infos{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .clear{
+        color: $gary;
+        cursor: pointer;
+    }
+    .clear:hover{
+        color: $secondary;
+    }
+}

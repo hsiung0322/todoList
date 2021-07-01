@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&family=Roboto&display=swap');@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Noto+Serif+TC:wght@500&display=swap');
-
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Noto+Serif+TC:wght@500&display=swap");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -13,8 +14,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
@@ -24,59 +25,71 @@ time, mark, audio, video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol, ul {
   list-style: none;
 }
+
 blockquote, q {
   quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
-/* 全域 border-box */ 
-*, *::before, *::after{
-  box-sizing: border-box;
+
+/* 全域 border-box */
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
-body{
+
+body {
   line-height: 1.5;
   font-family: 'Noto Serif TC','Roboto', sans-serif;
   background: #FFD370;
 }
 
-.todo-list{
+.todo-list {
   width: 500px;
   margin: 0 auto;
 }
-h1{
+
+h1 {
   font-size: 48px;
   text-align: center;
 }
-.input-item{
+
+.input-item {
   width: 500px;
   background: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
 }
-.add-item{
+
+.input-item .add-item {
   width: 450px;
   height: 48px;
   padding-left: 24px;
@@ -85,7 +98,8 @@ h1{
   outline: none;
   border-radius: 10px;
 }
-.add-btn{
+
+.input-item .add-btn {
   background: #333;
   color: #fff;
   text-align: center;
@@ -96,14 +110,19 @@ h1{
   cursor: pointer;
 }
 
-.status-list{
+.status-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-evenly;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   text-align: center;
   background: #fff;
   border-radius: 10px 10px 0 0;
 }
-.status-list li{
+
+.status-list li {
   width: 166.6px;
   font-size: 20px;
   border-bottom: 3px solid #EFEFEF;
@@ -111,61 +130,92 @@ h1{
   padding-bottom: 8px;
   cursor: pointer;
 }
-.status-list li:hover{
+
+.status-list li:hover {
   border-bottom: 3px solid #333;
 }
-.status-list .active{
+
+.status-list li .active {
   border-bottom: 3px solid #333;
 }
-.item-list{
+
+.item-list {
   background: #fff;
   border-radius: 0 0 10px 10px;
   font-size: 20px;
 }
-.item-list li{
+
+.item-list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding: 10px 24px;
 }
-.checkbox{
+
+.checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   cursor: pointer;
   overflow: hidden;
 }
-.checkbox input{
+
+.checkbox input {
   cursor: pointer;
   margin-right: 10px;
 }
-.checkbox input:checked,.checkbox input + span{
+
+.checkbox input + span {
   display: none;
 }
-.checkbox input:checked + span{
+
+.checkbox input:checked {
+  display: none;
+}
+
+.checkbox input:checked + span {
   display: inline-block;
   margin-right: 10px;
   color: #FFD370;
 }
-.checkbox input:checked + span + p{
+
+.checkbox input:checked + span + p {
   text-decoration: line-through;
-  color: #D3D3D3;
+  color: #9F9A91;
 }
-.remove-btn{
+
+.remove-btn {
   cursor: pointer;
-  color: #000;
+  color: #333;
   margin-left: 20px;
 }
-.infos{
+
+.infos {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   font-size: 12px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
-.clear{
+
+.infos .clear {
   color: #9F9A91;
   cursor: pointer;
 }
-.clear:hover{
+
+.infos .clear:hover {
   color: #333;
 }
