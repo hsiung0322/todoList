@@ -4,8 +4,19 @@ const addBtn = document.querySelector(".add-btn");
 const statusList = document.querySelector(".status-list");
 const checkbox = document.querySelector(".checkbox");
 
+//每次讀取網頁會從localStorage去看是否有資料
+const data = JSON.parse(localStorage.getItem("dataList"));
+// const data = [
+//     {
+//         content: "Mike",
+//         checked: true
+//     },
+//     {
+//         content: "Tom",
+//         checked: false
+//     }
+// ];
 
-let data = [];
 
 function unfinished_count(){
     let count=0;
@@ -60,7 +71,9 @@ function render(){
         itemList.innerHTML = htmlStr;
     }
 };
-
+function updateLocalStorage(){
+    localStorage.setItem("dataList",JSON.stringify(data));
+}
 
 render();
 
@@ -75,6 +88,8 @@ addBtn.addEventListener('click',function(){
         obj.checked = false;
         data.push(obj);
     }
+    //更新localStorage的資料
+    updateLocalStorage();
     //再次渲染
     render();
     addItem.value = "";
@@ -94,6 +109,9 @@ itemList.addEventListener('click',function(e){
     if(item.getAttribute("class")=="remove-btn fas fa-times"){
         let removeId = item.getAttribute("remove-id");
         data.splice(removeId,1);
+        //更新localStorage的資料
+        updateLocalStorage();
+        //再次渲染
         render();
     }
     //清除已完成項目
@@ -105,18 +123,25 @@ itemList.addEventListener('click',function(e){
                 data.splice(i,1);
             }
         }
+        //更新localStorage的資料
+        updateLocalStorage();
+        //再次渲染
         render();
     }else if(item.checked){ //true 的話 unfinished -> finished
         //直接變更data的checked  false -> true
         let index = item.getAttribute("data-id");
         data[index].checked = true;
-        //重新渲染
+        //更新localStorage的資料
+        updateLocalStorage();
+        //再次渲染
         render();
     }else if(item.checked == false){ //false 的話 finished -> funinished
         //直接變更data的checked  true -> false
         let index = item.getAttribute("data-id");
         data[index].checked = false;
-        //重新渲染
+        //更新localStorage的資料
+        updateLocalStorage();
+        //再次渲染
         render();
     }
     else{
