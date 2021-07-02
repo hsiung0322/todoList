@@ -46,20 +46,24 @@ function render(){
         data.forEach(function(item,index){
             if(item.checked){ //finished...
                 htmlStr+=`<li>
-                <label class="checkbox">
-                    <input type="checkbox" checked data-id=${index}>
-                    <span>✔</span>
-                    <p>${item.content}</p>
-                </label>
+                <div class="content">
+                    <label class="checkbox">
+                        <input type="checkbox" checked data-id=${index}>
+                        <span>✔</span>
+                    </label>
+                    <p class="text text-checked text-less">${item.content}</p>
+                </div>
                 <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                 </li>`
             }else{ //unfinished...
                 htmlStr+=`<li>
-                <label class="checkbox">
-                    <input type="checkbox" data-id=${index}>
-                    <span>✔</span>
-                    <p>${item.content}</p>
-                </label>
+                <div class="content">
+                    <label class="checkbox">
+                        <input type="checkbox" data-id=${index}>
+                        <span>✔</span>
+                    </label>
+                    <p class="text text-less">${item.content}</p>
+                </div>
                 <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                 </li>`
             }
@@ -104,7 +108,7 @@ addItem.addEventListener('keypress',function(e){
 
 itemList.addEventListener('click',function(e){
     item = e.target;
-    // console.log(item);
+    // console.log(e);
     //刪除特定項目
     if(item.getAttribute("class")=="remove-btn fas fa-times"){
         let removeId = item.getAttribute("remove-id");
@@ -135,7 +139,7 @@ itemList.addEventListener('click',function(e){
         updateLocalStorage();
         //再次渲染
         render();
-    }else if(item.checked == false){ //false 的話 finished -> funinished
+    }else if(item.checked == false){ //false 的話 finished -> unfinished
         //直接變更data的checked  true -> false
         let index = item.getAttribute("data-id");
         data[index].checked = false;
@@ -143,6 +147,13 @@ itemList.addEventListener('click',function(e){
         updateLocalStorage();
         //再次渲染
         render();
+    }
+    else if(item.nodeName == "P"){
+        if(item.classList.contains("text-less")){
+            item.classList.remove("text-less");
+        }else{
+            item.classList.add("text-less");
+        }  
     }
     else{
         return;
@@ -170,11 +181,13 @@ statusList.addEventListener('click',function(e){
             data.forEach(function(item,index){
                 if(item.checked){
                     html+=`<li>
-                    <label class="checkbox">
-                        <input type="checkbox" checked data-id=${index}>
-                        <span>✔</span>
-                        <p>${item.content}</p>
-                    </label>
+                    <div class="content">
+                        <label class="checkbox">
+                            <input type="checkbox" checked data-id=${index}>
+                            <span>✔</span>
+                        </label>
+                        <p class="text text-checked text-less">${item.content}</p>
+                    </div>
                     <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                     </li>`
                 }
@@ -193,11 +206,13 @@ statusList.addEventListener('click',function(e){
             data.forEach(function(item,index){
                 if(item.checked == false){
                     html+=`<li>
-                    <label class="checkbox">
-                        <input type="checkbox" data-id=${index}>
-                        <span>✔</span>
-                        <p>${item.content}</p>
-                    </label>
+                    <div class="content">
+                        <label class="checkbox">
+                            <input type="checkbox" data-id=${index}>
+                            <span>✔</span>
+                        </label>
+                        <p class="text text-less">${item.content}</p>
+                    </div>
                     <i class="remove-btn fas fa-times" remove-id="${index}"></i>
                     </li>`
                 }

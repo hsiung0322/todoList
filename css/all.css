@@ -82,6 +82,17 @@ h1 {
   text-align: center;
 }
 
+.text-checked {
+  text-decoration: line-through;
+  color: #9F9A91;
+}
+
+.text-less {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .input-item {
   width: 500px;
   background: #fff;
@@ -158,6 +169,17 @@ h1 {
   padding: 10px 24px;
 }
 
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.content p {
+  width: 400px;
+  word-wrap: break-word;
+}
+
 .checkbox {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -186,11 +208,6 @@ h1 {
   display: inline-block;
   margin-right: 10px;
   color: #FFD370;
-}
-
-.checkbox input:checked + span + p {
-  text-decoration: line-through;
-  color: #9F9A91;
 }
 
 .remove-btn {

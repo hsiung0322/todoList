@@ -11,6 +11,15 @@ h1{
     font-size: 48px;
     text-align: center;
 }
+.text-checked{
+    text-decoration: line-through;
+    color: $gary;
+}
+.text-less{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .input-item{
     width: 500px;
     background: $white;
@@ -68,6 +77,14 @@ h1{
         padding: 10px 24px;
     }
 }
+.content{
+    display: flex;
+    p{
+        width: 400px;
+        word-wrap: break-word;
+        // word-break:break-all;
+    }
+}
 //label > input
 .checkbox{
     display: flex;
@@ -87,10 +104,6 @@ h1{
             display: inline-block;
             margin-right: 10px;
             color: $primary;
-        }
-        &+span+p{
-            text-decoration: line-through;
-            color: $gary;
         }
     }
 }
